@@ -1,249 +1,46 @@
 <!DOCTYPE html>
-<!-- saved from url=(0038)http://hackyourworld.org/~iitd_aayush/ -->
-<html xmlns="http://www.w3.org/1999/xhtml" class="yui3-js-enabled"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <title>Time Your Deal</title>
-<link href="./index_files/css" rel="stylesheet" type="text/css">
-
-
-<style type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Terminal+Dosis:400,200' rel='stylesheet' type='text/css'>
+<link href='res/css/style.css' rel='stylesheet' type='text/css'>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=true&amp;key=ABQIAAAAkzZGWf1vQikpySlybf2qYBRH8IMf0YkIKAT0TAtn7gjcsHtQ1hTJQICLoBPCGAm_vxYFoBiepmMHUw" type="text/javascript"></script>
  
-  #map_canvas { height: 50% }
-</style>
-<script src="./index_files/maps" type="text/javascript"></script><script src="./index_files/main.js" type="text/javascript"></script><style type="text/css">@media print{.gmnoprint{display:none}}@media screen{.gmnoscreen{display:none}}</style>
-<style> 
-		#map{
-			font-family: 'Terminal Dosis', sans-serif;
-		position:absolute;
-		 top:340px;
-			right:30px;
-			width:400px; margin-right:20px; float:left; 
-		}
- 		 #map_canvas { 
-		 position:absolute;
-		 top:400px;
-			right:30px;
-			width:600px; margin-right:20px; float:left; }
-		#mychart {
-			position: absolute;
-    width: 100px;
-    height: 200px;
-	top:140px;
-			right:10px;
-			width:480px; margin-right:20px; float:left;
-}
-		
-	    .topcenter{
-			
-	        text-align: center;
-	        position: fixed;
-	        
-	        top: -6%;
-	        width: 100%;
-	        color: black;
-	        background: white;
-	       
-            padding: 20px;
-	    }
-		.right{
-			top:30px;
-			right:30px;
-			width:480px; margin-right:20px; float:left;
-		}
-		.left{
-			
-			font-family: 'Terminal Dosis', sans-serif;
-			
-			top:30px;
-			left:30px;
-			width:480px; margin-right:20px; float:left;
-		}
-	    h1{
-	        font: 2em "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
-	    }
-	    
-	    #footer{
-	        position:relative;
-	        width: 50%;
-	        left: 25%;
-            text-align: right;
-	        font: 125% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
-	    }
-</style> 
-<script src="./index_files/yui-min.js"></script>
-<script type="text/javascript">
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
 
-YUI().use('autocomplete', 'autocomplete-highlighters', function (Y) {
-  Y.one('#querytextbox').plug(Y.Plugin.AutoComplete, {
-    resultHighlighter: 'phraseMatch',
-    source: 'select * from search.suggest where query="{query}"',
-    yqlEnv: 'http://pieisgood.org/yql/tables.env'
-  });
-});
-function cleartextbox(){
-	document.getElementById("querytextbox").value='';
-}
-function nonew(){
-var a=document.getElementById("querytextbox");
-	//alert(a.value);
-	
-YUI().use('yql', function(Y) {
 
-    Y.YQL(' SELECT * FROM boss.search WHERE ck="dj0yJmk9YWF3ODdGNWZPYjg2JmQ9WVdrOWVsWlZNRk5KTldFbWNHbzlNVEEyTURFNU1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTUz" and secret="a3d93853ba3bad8a99a175e8ffa90a702cd08cfa" and q="'+a.value+' " ', function(r) {
-        //r now contains the result of the YQL Query
-		//use the YQL Developer console to learn
-		//what data is coming back in this object
-		//and how that data is structured.
-		console.log(r);
-		
-		
-		//
-		//if(r.query && r.query.results && r.query.results.bossresponse && r.query.results.bossresponse.news && r.query.results.bossresponse.news.results.result){
-      var array=r.query.results.bossresponse.web.results.result,
-          out = '<br><br><br><br><ol>',
-          i = 0,
-          cur = '<br><br><br>';
-      for(i=0,j=5;i<j;i++){
-        cur = array[i];
-        out += '<li><font size="5"><a href="' + cur.clickurl + '" target="_blank">' +
-                cur.title.content + '</a><br></font><font color="green">'+cur.clickurl+'</font><p>' + cur.abstract.content +
-               '</p></li>';
-      }
-      out += '</ol>';
-      
-	  document.getElementById("aayush").innerHTML=out;
-     
-   //
-    });
 
-});
-
-}
-function map(){
-	   var map1;
-        if (GBrowserIsCompatible()) {
-          var mapOptions = {
-            googleBarOptions : {
-              style : "new"
-            }
-          }
-          map1 = new GMap2(document.getElementById("map_canvas"), mapOptions);
-          map1.setCenter(new GLatLng(28.544794767771325,77.19234466552734), 13);
-          map1.setUIToDefault();
-          map1.enableGoogleBar();
-		  //
-	 document.getElementById("map").innerHTML="<h4>Too Urgent To Buy</h4>";
-  }
-}
-function query(){
-	var a=document.getElementById("querytextbox");
-	 
-	//alert(a.value);
-YUI().use('yql', function(Y) {
-
-    Y.YQL(' SELECT * FROM boss.search WHERE ck="dj0yJmk9YWF3ODdGNWZPYjg2JmQ9WVdrOWVsWlZNRk5KTldFbWNHbzlNVEEyTURFNU1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTUz" and secret="a3d93853ba3bad8a99a175e8ffa90a702cd08cfa" and q="'+a.value+' release" and service="news"', function(r) {
-        //r now contains the result of the YQL Query
-		//use the YQL Developer console to learn
-		//what data is coming back in this object
-		//and how that data is structured.
-		console.log(r);
-		
-		
-		//
-		//if(r.query && r.query.results && r.query.results.bossresponse && r.query.results.bossresponse.news && r.query.results.bossresponse.news.results.result){
-      var array=r.query.results.bossresponse.news.results.result,
-          out = '<br><br><br><br><ol>',
-          i = 0,
-          cur = '<br>';
-      for(i=0,j=5;i<j;i++){
-        cur = array[i];
-        out += '<li><h3><a href="' + cur.url + '" target="_blank">' +
-                cur.title + '</a></h3><p>' + cur.abstract +
-               '</p></li>';
-      }
-      out += '</ol>';
-      
-	  document.getElementById("aayush").innerHTML=out;
-     
-   //
-    });
-
-});}
-function righttables(){
-	
-	var b=document.getElementById("querytextbox");
-	if(b.value=="iphone"){
-		document.getElementById("mychart").innerHTML='';
-		var t=setTimeout("",2000);
-YUI().use('charts', function (Y) 
-{ 	
-   // Data for the chart
-var myDataValues = [
-    {category:"29/6/2007", values:500},
-    {category:"5/9/2007", values:399},
-    {category:"6/2008", values:199},
-    {category:"6/2009", values:199},
-    
-];
-
-// Instantiate and render the chart
-var mychart = new Y.Chart({
-    dataProvider: myDataValues,
-    render: "#mychart"
-});});}
-else if(b.value=="macbook pro"){
-	document.getElementById("mychart").innerHTML='';
-	var t=setTimeout("",2000);
-YUI().use('charts', function (Y) 
-{ 	
-   // Data for the chart
-var myDataValues = [
-    {category:"24/4/2006", values:2100},
-    {category:"5/9/2007", values:1999},
-    {category:"6/2008", values:1994},
-    {category:"6/2009", values:1993},
-    
-];
-
-// Instantiate and render the chart
-var mychart = new Y.Chart({
-    dataProvider: myDataValues,
-    render: "#mychart"
-});});
-	}
-else{	  document.getElementById("mychart").innerHTML='';} }
-function doallthese(){
-query();
-righttables();
-map();
-}
-</script><link id="yui_3_4_1_1_1319360290897_2" type="text/css" rel="stylesheet" href="./index_files/combo" charset="utf-8"><script id="yui_3_4_1_1_1319360290897_3" type="text/javascript" src="./index_files/combo(1)" charset="utf-8"></script>
-<script id="yui_3_4_1_1_1319360290897_4" type="text/javascript" src="./index_files/combo(2)" charset="utf-8"></script></head>
+</head>
 
 <body>
-
-
-<div id="topcenter" class="topcenter">
-  
-  <label for="ac-input"><h1>Search For The Product</h1></label><br>
-  <input id="querytextbox" type="text" onkeypress="if (event.keyCode==13){doallthese();}" value="enter the product here" onclick="cleartextbox()" size="40" class="yui3-aclist-input" aria-autocomplete="list" aria-expanded="false" aria-owns="yui_3_4_1_1_1319360290897_46" autocomplete="off">
-  <input type="button" id="button1" name="field1" value="no new releases" onclick="nonew()">
-
-  
-<div id="yui_3_4_1_1_1319360290897_20" class="yui3-widget yui3-aclist yui3-widget-positioned yui3-aclist-hidden" style="position: absolute; width: 334px; left: 426px; top: 142px; " aria-hidden="true"><div id="yui_3_4_1_1_1319360290897_22" class="yui3-aclist-content"><ul class="yui3-aclist-list" id="yui_3_4_1_1_1319360290897_46" role="listbox"></ul></div></div><div class="yui3-aclist-aria" aria-live="polite" role="status"></div></div>
-<div class="left">
-	<p id="aayush"></p>
+<div id='container'>
+<div class='top' align='center' >
+	
+	<h1>Search For The Product</h1><br>
+	<input id='querytextbox' type="text"  onkeypress='if (event.keyCode==13){doallthese();}' value="Enter a product here" 	onclick="cleartextbox()" size="40"> 
+	<button onclick="doallthese();">Search!</button> 
+	<input name="field1" type="button" id="button1"  onclick="nonew();" value="No new releases??">
+	(<a href="./timeyourdeal.pdf" target="_blank">about this site</a>)
 </div>
-<div class="right">
-	<p id="aayushright"></p>
-    
-</div>
+
+<div class='right'>
 <div id="mychart"></div>
-<div class="bottomright"></div>
-<p id="map"></p>
+<div id='map'></div>
 <div id="map_canvas"></div>
+</div>
+
+<div id='left'>
+</div>
+
+<div class='bottom'>
+</div>
+</div>
 
 
+<script src="res/js/javascript.js"></script>
+
+</body>
+</html>
 
 
-</body></html>
